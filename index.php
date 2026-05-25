@@ -2,7 +2,7 @@
 // ============================================================
 // index.php  —  Login & Register (Split-Screen Layout)
 // ============================================================
-require_once __DIR__ . '/damat/includes/auth.php';
+require_once(__DIR__ . '/includes/auth.php');
 
 startSecureSession();
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = $_POST['password'] ?? '';
 
         if (login($username, $password)) {
-            header('Location: /damat/pages/dashboard.php');
+            header('Location: /pages/dashboard.php');
             exit;
         }
         $error = 'Email atau password salah.';
