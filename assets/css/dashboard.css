@@ -1,0 +1,299 @@
+/* ===== BASE nav/sidebar fixes ===== */
+.sidebar-logo    { display:flex;align-items:center;gap:12px;padding:24px 20px; }
+.nav-icon-google { font-size:20px;margin-right:10px;vertical-align:middle; }
+
+@keyframes pulse-hot {
+  0%,100% { box-shadow:0 1px 4px rgba(232,53,15,.35); }
+  50%      { box-shadow:0 2px 10px rgba(232,53,15,.65); }
+}
+.badge-hot {
+  display:inline-flex;align-items:center;justify-content:center;
+  background:#DB1A1A;
+  color:#fff;font-size:8px;font-weight:800;letter-spacing:.5px;
+  padding:2px 6px;border-radius:99px;margin-left:7px;
+  vertical-align:middle;line-height:1.4;text-transform:uppercase;
+  animation:pulse-hot 2s ease-in-out infinite;
+}
+.nav-item        { display:flex;align-items:center;padding:11px 20px;text-decoration:none;color:rgba(255,255,255,.65);transition:all .18s;border-radius:8px;margin:1px 8px; }
+.nav-item.active { color:#fff;background:rgba(255,255,255,.12); }
+.nav-item:hover  { color:#fff;background:rgba(255,255,255,.07); }
+
+/* stat icons */
+.stat-icon { width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px; }
+.stat-card.balance .stat-icon { background:#FAF5EE;color:#8B5E30; }
+.stat-card.income  .stat-icon { background:#EDF5EB;color:#5F8B5A; }
+.stat-card.expense .stat-icon { background:#FEF0E6;color:#C4600A; }
+
+/* desktop chart */
+.chart-card        { display:flex;flex-direction:column;overflow:hidden; }
+.chart-container   { position:relative;width:100%;height:240px; }
+.chart-container canvas { width:100%!important;height:100%!important; }
+
+/* btn-delete */
+.btn-delete-tx { background:none;border:none;color:#9C8070;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:4px;transition:color .2s; }
+.btn-delete-tx:hover { color:#ef4444; }
+
+/* ===== MOBILE-ONLY: everything inside @media ===== */
+@media (max-width: 600px) {
+
+  /* hide desktop elements */
+  .app-layout   { display:none !important; }
+
+  /* show mobile wrapper */
+  .mob-shell    { display:flex !important; flex-direction:column; min-height:100vh; background:#F5F0E8;padding-bottom: 50px; }
+
+  /* ---------- HEADER ---------- */
+  .mob-header {
+    background:#8B5E30;
+    padding:32px 18px 24px;
+    position:relative;overflow:hidden;
+  }
+  .mob-hdr-top {
+    display:flex;align-items:flex-start;justify-content:space-between;
+    margin-bottom:20px;position:relative;z-index:1;
+  }
+  .mob-greeting     { font-size:21px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px;line-height:1.2; }
+  .mob-greeting-sub { font-size:12px;color:rgba(255,255,255,.6);margin-top:3px; }
+  .mob-avatar {
+    width:38px;height:38px;border-radius:50%;
+    background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.3);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:700;font-size:15px;text-decoration:none;flex-shrink:0;
+  }
+  .mob-period {
+    display:inline-flex;align-items:center;gap:5px;
+    background:#3D2510;
+    border-radius:99px;padding:5px 13px;color:#fff;font-size:12.5px;font-weight:600;
+    margin-bottom:13px;position:relative;z-index:1;
+  }
+  .mob-period .material-symbols-rounded { font-size:13px; }
+  .mob-bal-section { position:relative;z-index:1; }
+  .mob-bal-lbl {
+    font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+    color:rgba(255,255,255,.5);margin: 10px 10px;
+    display:flex;align-items:center;gap:5px;
+  }
+  .mob-bal-lbl .material-symbols-rounded { font-size:13px; }
+
+  /* ── Toggle visibility button ── */
+  .mob-bal-eye {
+    margin-left:4px;background:none;border:none;padding:0;cursor:pointer;
+    color:rgba(255,255,255,.55);display:flex;align-items:center;line-height:1;
+    transition:color .2s;
+  }
+  .mob-bal-eye:active { color:#fff; }
+  .mob-bal-eye .material-symbols-rounded { font-size:15px; }
+
+  /* ── Sensor bar (pengganti nominal saat disembunyikan) ── */
+  .bal-sensor {
+    display:inline-block;
+    height:12px;border-radius:6px;
+    background:rgba(255,255,255,.25);
+    vertical-align:middle;
+  }
+  .bal-sensor.lg  { width:130px; }  /* sisa keuangan */
+  .bal-sensor.sm  { width:80px; }   /* pemasukan / pengeluaran */
+
+  /* State: angka tampil / sensor tampil */
+  body.bal-hidden .bal-real   { display:none !important; }
+  body.bal-hidden .bal-sensor { display:inline-block !important; }
+  body:not(.bal-hidden) .bal-real   { display:inline !important; }
+  body:not(.bal-hidden) .bal-sensor { display:none !important; }
+  .mob-bal-amt {
+    font-family:'Poppins','Inter',sans-serif;
+    font-size:20px;font-weight:700;color:#fff;letter-spacing:-1.5px;line-height:1;margin-bottom:30px;
+  }
+  .mob-minicards { display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative;z-index:1;margin-bottom: 15px;overflow:visible; }
+  .mob-minicard {
+    background:#3D2510;
+    border-radius:13px;
+    padding:4px 5px;display:flex;align-items:center;gap:10px;
+  }
+  .mob-mc-icon {
+    width:30px;height:30px;border-radius:50%;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .mob-mc-icon.inc { background:#5F8B5A; }
+  .mob-mc-icon.exp { background:#C4600A; }
+  .mob-mc-icon .material-symbols-rounded { font-size:16px;color:#fff; }
+  .mob-mc-lbl { font-size:10px;color:rgba(255,255,255,.6); }
+  .mob-mc-val { font-size:14.5px;font-weight:700;color:#fff;letter-spacing:-.3px; }
+  
+  .mob-wallet-img {
+    position: absolute;    /* Membuat gambar bebas digeser tanpa merusak teks saldo */
+    top: -80px;            /* Menggeser posisi gambar naik ke atas melewati batas kartu */
+    right: -20px;           /* Merapatkan posisi dompet ke sisi kanan atas */
+    width: 120px;           /* Mengatur lebar dimensi gambar dompet agar proporsional */
+    height: auto;
+    z-index: -1;           /* Memastikan dompet berada di layer paling atas */
+    filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.15)); /* Memberikan bayangan halus di bawah dompet */
+    transform: rotate(15deg);
+    }
+
+  /* ---------- BUDGET BAR ---------- */
+  .mob-budget {
+    background:#FDFAF5;margin:0 14px;border-radius:14px;
+    padding:13px 15px;
+    border:1px solid #EAE4D8;transform:translateY(-16px);margin-bottom:-2px;
+  }
+  .mob-budget-hdr  { display:flex;justify-content:space-between;align-items:center;margin-bottom:7px; }
+  .mob-budget-lbl  { font-size:12.5px;font-weight:600;color:#2C1E0F; }
+  .mob-budget-pct  { font-size:13px;font-weight:700; }
+  .mob-btrack      { height:7px;background:#EAE4D8;border-radius:99px;overflow:hidden; }
+  .mob-bfill       { height:100%;border-radius:99px;background:#5F8B5A;transition:width .6s; }
+  .mob-bfill.warning  { background:#D97706; }
+  .mob-bfill.danger{ background:#C4600A; }
+  .mob-budget-meta { display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:#9C8070; }
+
+  /* ---------- SHORTCUTS ---------- */
+  .mob-shortcuts {
+    background:#FDFAF5;margin:0 14px 12px;border-radius:16px;
+    padding:16px 8px 12px;border:1px solid #EAE4D8;
+  }
+  .mob-sc-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:2px; }
+  .mob-sc-btn {
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    padding:9px 3px;border-radius:10px;text-decoration:none;
+    background:none;border:none;cursor:pointer;transition:background .15s;
+  }
+  .mob-sc-btn:active { background:#EDE8DF; }
+  .mob-sc-icon { width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px; }
+  .mob-sc-icon.brown { background:#FAF5EE;color:#6E4420; }
+  .mob-sc-icon.sage  { background:#EDF5EB;color:#5F8B5A; }
+  .mob-sc-icon.terra { background:#FEF0E6;color:#C4600A; }
+  .mob-sc-icon.gray  { background:#EDE8DF;color:#5C4030; }
+  .mob-sc-lbl { font-size:10.5px;color:#5C4030;font-weight:500;text-align:center;line-height:1.3; }
+
+  /* ---------- SECTION CARDS ---------- */
+  .mob-section {
+    background:#FDFAF5;margin:0 14px 12px;border-radius:16px;
+    padding:16px 15px;border:1px solid #EAE4D8;
+  }
+  .mob-sec-hdr  { display:flex;align-items:center;justify-content:space-between;margin-bottom:13px; }
+  .mob-sec-ttl  { font-size:13.5px;font-weight:700;color:#2C1E0F; }
+  .mob-sec-link { font-size:12px;color:#8B5E30;font-weight:600; }
+  .mob-chart    { position:relative;height:175px; }
+  .mob-chart canvas { width:100%!important;height:100%!important; }
+  .mob-empty    { text-align:center;padding:24px 0;color:#9C8070;font-size:13px; }
+
+  /* ---------- BOTTOM NAV ---------- */
+  .mob-nav {
+    position:fixed;bottom:0;left:0;right:0;
+    background:#FDFAF5;border-top:1px solid #EAE4D8;
+    z-index:300;display:flex;align-items:center;
+    height:60px;padding:0 6px;
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .mob-nav-i {
+    flex:1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:2px;text-decoration:none;
+    padding:4px;color:#9C8070;transition:color .15s;
+  }
+  .mob-nav-i .material-symbols-rounded { font-size:22px;display:block; }
+  .mob-nav-i span.lbl { font-size:9.5px;font-weight:500; }
+  .mob-nav-i.on { color:#6E4420; }
+  .mob-nav-fab {
+    flex:0 0 56px;display:flex;align-items:center;
+    justify-content:center;position:relative;margin-top:-22px;
+  }
+  .mob-fab {
+    width:54px;height:54px;border-radius:50%;
+    background:#8B5E30;
+    border:3px solid #FDFAF5;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;text-decoration:none;
+  }
+  .mob-fab .material-symbols-rounded { font-size:25px; }
+
+  /* ---------- spacing at bottom ---------- */
+  .mob-foot { height:16px; }
+
+  /* ── DamGPT shortcut icon & badge HOT (mobile) ── */
+  .mob-sc-icon img {
+    width:30px;height:30px;object-fit:contain;border-radius:6px;display:block;
+  }
+  .mob-sc-lbl-wrap {
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+  }
+  .mob-sc-hot {
+    position:absolute;top: 465px;right: 130px;
+    background:#DB1A1A;
+    color:#fff;font-size:6.5px;font-weight:800;letter-spacing:.3px;
+    padding:1px 4px;border-radius:99px;line-height:1.6;text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  /* ── DamGPT bottom nav icon & badge HOT (mobile) ── */
+  .mob-nav-damgpt { position:relative;display:flex;flex-direction:column;align-items:center; }
+    .mob-nav-hot {
+    position:absolute;top:-5px;right:-8px;
+    background:#DB1A1A;
+    color:#fff;font-size:6.5px;font-weight:800;letter-spacing:.3px;
+    padding:1px 4px;border-radius:99px;line-height:1.6;text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  /* hide desktop charts/stats/budget blocks */
+  .charts-grid     { display:none !important; }
+  .budget-bar-wrap { display:none !important; }
+  .stats-grid      { display:none !important; }
+
+  /* input zoom fix */
+  input,select,textarea { font-size:16px !important; }
+}
+
+/* ── DESKTOP: Dashboard Grid (Charts + Transaksi) ── */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+}
+.dashboard-left  { display:flex; flex-direction:column; gap:18px; }
+.dashboard-right { display:flex; flex-direction:column; gap:18px; }
+
+.recent-tx-card {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: 20px 20px;
+  border: 1px solid var(--border-light);
+}
+.recent-tx-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:13px;
+}
+.recent-tx-title {
+  font-weight:600; font-size:14px; color:var(--text-primary);
+  display:flex; align-items:center; gap:6px;
+}
+.recent-tx-link { font-size:12.5px; color:var(--brown-500); font-weight:500; text-decoration:none; }
+.recent-tx-link:hover { color:var(--brown-700); }
+
+.topbar-greeting-name { font-family:var(--font-display); font-size:17px; font-weight:700; color:var(--text-primary); }
+.topbar-greeting-sub  { font-size:12px; color:var(--text-muted); }
+
+/* ===== DESKTOP: hide mobile shell ===== */
+@media (min-width: 601px) {
+  .mob-shell { display:none !important; }
+  .mob-nav   { display:none !important; }
+  .hamburger { display:flex; }
+}
+
+/* ===== TABLET 601-1024px ===== */
+@media (min-width:601px) and (max-width:1024px) {
+  .sidebar { transform:translateX(-100%);transition:transform .3s; }
+  .sidebar.open { transform:translateX(0); }
+  .main-content { margin-left:0 !important; }
+  .hamburger { display:flex !important; }
+  .stats-grid     { grid-template-columns:repeat(2,1fr) !important; }
+  .charts-grid    { grid-template-columns:1fr !important; }
+  .dashboard-grid { grid-template-columns:1fr !important; }
+}
+
+/* ===== TABLET 901-1024px: sidebar visible ===== */
+@media (min-width:901px) and (max-width:1024px) {
+  .sidebar { transform:none; }
+  .main-content { margin-left:240px !important; }
+  .hamburger { display:none !important; }
+}
