@@ -8,8 +8,6 @@ require_once __DIR__ . '/config.php';
 function getDB(): PDO {
     static $pdo = null;
     if ($pdo === null) {
-        // Ambil host dan port dari string '172.17.0.1:3316'
-        // Pastikan DB_HOST didefinisikan, jika tidak gunakan default localhost
         $dbHost = defined('DB_HOST') ? DB_HOST : 'mariadb_container';
         $hostParts = explode(':', $dbHost);
         $host = $hostParts[0];
