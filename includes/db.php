@@ -9,14 +9,18 @@ function getDB(): PDO {
     static $pdo = null;
     if ($pdo === null) {
         $dbHost = defined('DB_HOST') ? DB_HOST : 'mariadb_container';
+        // $dbHost = 'localhost';
         $hostParts = explode(':', $dbHost);
         $host = $hostParts[0];
         $port = isset($hostParts[1]) ? $hostParts[1] : '3306';
 
         // Ambil DB_NAME, DB_USER, DB_PASS dengan fallback aman
         $dbName    = defined('DB_NAME') ? DB_NAME : 'user_amiril';
+        // $dbName    = defined('DB_NAME') ? DB_NAME : 'damat_db';
         $dbUser    = defined('DB_USER') ? DB_USER : 'amiril';
+        // $dbUser    = defined('DB_USER') ? DB_USER : 'root';
         $dbPass    = defined('DB_PASS') ? DB_PASS : 'rillZFb48A3exDB';
+        $dbPass    = defined('DB_PASS') ? DB_PASS : '';
         
         // SOLUSI UTAMA: Jika DB_CHARSET belum ada di config.php, otomatis pakai utf8mb4
         $charset   = defined('DB_CHARSET') ? DB_CHARSET : 'utf8mb4';
@@ -39,7 +43,7 @@ function getDB(): PDO {
             http_response_code(500);
             // Log detail error ke file untuk debugging, tapi kirim pesan umum ke user
             error_log("Connection Error: " . $e->getMessage());
-            die(json_encode(['error' => 'Koneksi database gagal.']));
+            die(json_encode(['error' => 'Koneksi database gagal. ']));
         }
     }
     return $pdo;
