@@ -101,8 +101,6 @@ if (!$imageData) {
 
 // ── 3. Kirim ke Groq Vision API ──────────────────────────────
 
-$apiUrl     = 'https://api.groq.com/openai/v1/chat/completions';
-
 $tanggalHariIni = date('Y-m-d');
 
 $systemPrompt = <<<PROMPT

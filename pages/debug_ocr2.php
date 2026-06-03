@@ -7,7 +7,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 $result = [];
 
-// ── TEST 1: Buat PNG 1x1 via GD dan encode Base64 ────────────
+// ── TEST 1: Buat PNG 1x1 via GD dan encode Base64 ────────────api
 $img   = imagecreatetruecolor(1, 1);
 $white = imagecolorallocate($img, 255, 255, 255);
 imagefilledrectangle($img, 0, 0, 1, 1, $white);
@@ -37,7 +37,6 @@ $payload = json_encode([
 
 $result['payload_size_bytes'] = strlen($payload);
 
-$ch = curl_init('https://api.groq.com/openai/v1/chat/completions');
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST           => true,
