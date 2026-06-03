@@ -59,10 +59,6 @@ if (
     }
     $messages[] = ['role' => 'user', 'content' => $userMessage];
 
-    $groqApiKey = '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';
-    $model      = 'llama-3.1-8b-instant';
-    $apiUrl     = 'https://api.groq.com/openai/v1/chat/completions';
-
     $payload = json_encode([
         'model'       => $model,
         'messages'    => $messages,
